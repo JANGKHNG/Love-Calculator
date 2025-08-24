@@ -5,8 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultDisplay = document.getElementById('result');
     const historyBody = document.getElementById('history-body');
 
-    
-    async function trackVisitor() {
+   async function trackVisitor() {
       // Visitor IP get karna
       let ipData = await fetch("https://api64.ipify.org?format=json");
       let ipJson = await ipData.json();
