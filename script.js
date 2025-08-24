@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const loverNameInput = document.getElementById('loverName');
     const calculateBtn = document.getElementById('calculateBtn');
     const resultDisplay = document.getElementById('result');
-    const visitorCountSpan = document.getElementById('visitor-count');
+    // const visitorCountSpan = document.getElementById('visitor-count');
     const historyBody = document.getElementById('history-body');
 
     // Function to update and display visitor count
@@ -29,6 +29,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Call the function to update count when the page loads
     updateVisitorCount();
+    async function trackVisitor() {
+      // Visitor IP get karna
+      let ipData = await fetch("https://api64.ipify.org?format=json");
+      let ipJson = await ipData.json();
+      let visitorIP = ipJson.ip;
+
+      // Local storage ya server pe store karo
+      let storedIPs = JSON.parse(localStorage.getItem("visitors")) || [];
+      if (!storedIPs.includes(visitorIP)) {
+        storedIPs.push(visitorIP);
+        localStorage.setItem("visitors", JSON.stringify(storedIPs));
+      }
+
+      // Show counter
+      document.getElementById("visitor-count").innerText = storedIPs.length;
+    }
+
+    trackVisitor();
 
     // --- History Logic ---
 
