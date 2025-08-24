@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Love Calculator</title>
-    <link rel="icon" type="image/png" href="KUMAR.png">
+    <link rel="icon" type="image/png" href="img/KUMAR.png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -23,12 +23,31 @@
             <div id="result" class="result-display"></div>
         </div>
         <p class="note">
-            <strong>Note:</strong> This is a fun game. Don't take it seriously.
+            <strong>Note:</strong> 1.This is a fun game. Don't take it seriously.<br>
+            2.Take a screenshort your result.
         </p>
         
+        <!-- Result History Table -->
+        <div class="history-container">
+            <h2>Calculation History</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Your Name</th>
+                        <th>Lover's Name</th>
+                        <th>Love %</th>
+                    </tr>
+                </thead>
+                <tbody id="history-body">
+                    <!-- Results will be added here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
         <!-- Visitor Counter Display Area -->
         <div class="visitor-counter">
-            <p>👥 Total Visitors: <span id="visitor-count">Loading...</span></p>
+            <p>👥 Total Refresh: <span id="visitor-count">Loading...</span></p>
+            
         </div>
     </div>
     <script src="script.js"></script>
