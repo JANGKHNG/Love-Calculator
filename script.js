@@ -3,54 +3,71 @@ document.addEventListener('DOMContentLoaded', () => {
     const loverNameInput = document.getElementById('loverName');
     const calculateBtn = document.getElementById('calculateBtn');
     const resultDisplay = document.getElementById('result');
-    // const visitorCountSpan = document.getElementById('visitor-count');
+    const visitorCountSpan = document.getElementById('visitor-count');
+    const historyBody = document.getElementById('history-body');
 
     // Function to update and display visitor count
+    // NOTE: Aapke original code mein do counter the. Main ek (CountAPI wala) use kar raha hu.
     function updateVisitorCount() {
-        // Aap yahan 'love-calculator-your-unique-name' ki jagah kuch bhi unique daal sakte hain
-        // Taki aapka counter dusre projects se alag rahe.
         const namespace = 'love-calculator-your-unique-name'; 
         const key = 'visits';
 
         fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
             .then(res => res.json())
             .then(data => {
-                visitorCountSpan.textContent = data.value;
+                if (visitorCountSpan) {
+                    visitorCountSpan.textContent = data.value;
+                }
             })
             .catch(error => {
                 console.error('Error fetching visitor count:', error);
-                visitorCountSpan.textContent = 'Unavailable';
+                if (visitorCountSpan) {
+                    visitorCountSpan.textContent = '<a href="https://hits.sh/jangkhng.github.io/Love-Calculator/"><img alt="Hits" src="https://hits.sh/jangkhng.github.io/Love-Calculator.svg?color=ffffff"/></a>';
+                }
             });
     }
 
     // Call the function to update count when the page loads
     updateVisitorCount();
 
-    async function trackVisitor() {
-      // Visitor IP get karna
-      let ipData = await fetch("https://api64.ipify.org?format=json");
-      let ipJson = await ipData.json();
-      let visitorIP = ipJson.ip;
+    // --- History Logic ---
 
-      // Local storage ya server pe store karo
-      let storedIPs = JSON.parse(localStorage.getItem("visitors")) || [];
-      if (!storedIPs.includes(visitorIP)) {
-        storedIPs.push(visitorIP);
-        localStorage.setItem("visitors", JSON.stringify(storedIPs));
-      }
+    // Load history from localStorage or initialize an empty array
+    const loveHistory = JSON.parse(localStorage.getItem('loveHistory')) || [];
 
-      // Show counter
-      document.getElementById("visitor-count").innerText = storedIPs.length;
+    // Function to render the history table
+    function renderHistoryTable() {
+        // Clear existing table rows
+        historyBody.innerHTML = '';
+
+        // Loop through history and create table rows
+        loveHistory.forEach(entry => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${entry.yourName}</td>
+                <td>${entry.loverName}</td>
+                <td><strong>${entry.percentage}%</strong></td>
+            `;
+            historyBody.appendChild(row);
+        });
     }
+    
+    // Render the table on initial page load
+    renderHistoryTable();
 
-    trackVisitor();
+    // --- End of History Logic ---
 
-        // Existing Love Calculator Logic
+
+    // Existing Love Calculator Logic
     const usedNames = JSON.parse(localStorage.getItem('usedLoveCalculatorNames')) || [];
 
     calculateBtn.addEventListener('click', () => {
-        const yourName = yourNameInput.value.trim().toLowerCase();
-        const loverName = loverNameInput.value.trim().toLowerCase();
+        const yourNameOriginal = yourNameInput.value.trim();
+        const loverNameOriginal = loverNameInput.value.trim();
+
+        // Use lowercase for calculation logic
+        const yourName = yourNameOriginal.toLowerCase();
+        const loverName = loverNameOriginal.toLowerCase();
 
         if (!yourName || !loverName) {
             resultDisplay.textContent = "Please enter both names.";
@@ -74,6 +91,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const lovePercentage = (loveScore % 101); // To keep it under 101
 
         resultDisplay.innerHTML = `❤️ Your Love Percentage: <strong>${lovePercentage}%</strong> ❤️`;
+        
+        // --- Save the new result to history ---
+        const newHistoryEntry = {
+            yourName: yourNameOriginal,
+            loverName: loverNameOriginal,
+            percentage: lovePercentage
+        };
+        loveHistory.push(newHistoryEntry);
+        localStorage.setItem('loveHistory', JSON.stringify(loveHistory));
+        // --- End of saving logic ---
+
+        // Re-render the table with the new entry
+        renderHistoryTable();
 
         // Store the used names
         usedNames.push(nameCombination1);
