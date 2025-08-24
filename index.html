@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Love Calculator</h1>
+        <div class="love-calculator">
+            <div class="input-group">
+                <label for="yourName">Your Name</label>
+                <input type="text" id="yourName" placeholder="Aapka Naam Daalein">
+            </div>
+            <div class="input-group">
+                <label for="loverName">Your Lover Name</label>
+                <input type="text" id="loverName" placeholder="Lover ka Naam Daalein">
+            </div>
+            <button id="calculateBtn">Calculate Love</button>
+            <div id="result" class="result-display"></div>
+        </div>
+        <p class="note">
+            <strong>Note:</strong> This is a fun game. Don't take it seriously.
+        </p>
+        
+        <!-- Visitor Counter Display Area -->
+        <div class="visitor-counter">
+            <p>👥 Total Visitors: <span id="visitor-count">Loading...</span></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
