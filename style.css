@@ -13,8 +13,9 @@ body {
     align-items: center;
     min-height: 100vh;
     background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
-    overflow: hidden;
+    overflow-y: auto; /* Added for scrolling on small screens */
     position: relative;
+    padding: 20px 0;
 }
 
 body::before {
@@ -27,6 +28,7 @@ body::before {
     background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
     background-size: 20px 20px;
     animation: move 20s linear infinite;
+    z-index: -1;
 }
 
 @keyframes move {
@@ -129,11 +131,67 @@ button:hover {
 .note {
     margin-top: 30px;
     color: red;
-    /*color: rgba(255, 255, 255, 0.8);*/
     font-size: 0.9em;
+    text-align: left; /* Aligned note text for better readability */
 }
 
-/* New CSS for Visitor Counter */
+.note strong {
+    display: block; /* Ensures each note starts on a new line */
+    margin-bottom: 5px;
+}
+
+/* --- New CSS for History Table --- */
+
+.history-container {
+    margin-top: 30px;
+    max-height: 200px; /* Set a max height */
+    overflow-y: auto; /* Add scrollbar if content exceeds max height */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.history-container h2 {
+    color: #fff;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #fff;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+thead tr {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+th {
+    font-weight: 600;
+}
+
+tbody tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+td {
+    font-weight: 300;
+}
+
+/* --- End of History Table CSS --- */
+
+/* CSS for Visitor Counter */
 .visitor-counter {
     margin-top: 25px;
     padding-top: 15px;
