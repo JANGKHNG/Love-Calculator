@@ -3,32 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const loverNameInput = document.getElementById('loverName');
     const calculateBtn = document.getElementById('calculateBtn');
     const resultDisplay = document.getElementById('result');
-    // const visitorCountSpan = document.getElementById('visitor-count');
     const historyBody = document.getElementById('history-body');
 
-    // Function to update and display visitor count
-    // NOTE: Aapke original code mein do counter the. Main ek (CountAPI wala) use kar raha hu.
-    function updateVisitorCount() {
-        const namespace = 'love-calculator-your-unique-name'; 
-        const key = 'visits';
-
-        fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
-            .then(res => res.json())
-            .then(data => {
-                if (visitorCountSpan) {
-                    visitorCountSpan.textContent = data.value;
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching visitor count:', error);
-                if (visitorCountSpan) {
-                    visitorCountSpan.textContent = '<a href="https://hits.sh/jangkhng.github.io/Love-Calculator/"><img alt="Hits" src="https://hits.sh/jangkhng.github.io/Love-Calculator.svg?color=ffffff"/></a>';
-                }
-            });
-    }
-
-    // Call the function to update count when the page loads
-    updateVisitorCount();
+    
     async function trackVisitor() {
       // Visitor IP get karna
       let ipData = await fetch("https://api64.ipify.org?format=json");
