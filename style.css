@@ -1184,4 +1184,13 @@ body {
     .result-message {
         font-size: var(--font-size-base);
     }
+    .signature {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  opacity: 0.7;
+  margin: 0;
+  font-weight: var(--font-weight-normal);
+  letter-spacing: 0.5px;
+}
+
 }
