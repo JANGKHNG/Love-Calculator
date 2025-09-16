@@ -3,53 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Calculator</title>
+    <title>Love Calculator - Discover Your Love Compatibility!</title>
+    <link rel="stylesheet" href="style.css">    
     <link rel="icon" type="image/png" href="KUMAR.png">
-    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-    <div class="container">
-        <h1>Love Calculator</h1>
-        <div class="love-calculator">
-            <div class="input-group">
-                <label for="yourName">Your Name</label>
-                <input type="text" id="yourName" placeholder="Aapka Naam Daalein">
-            </div>
-            <div class="input-group">
-                <label for="loverName">Your Lover Name</label>
-                <input type="text" id="loverName" placeholder="Lover ka Naam Daalein">
-            </div>
-            <button id="calculateBtn">Calculate Love</button>
-            <div id="result" class="result-display"></div>
-        </div>
-        <p class="note">
-            <strong>Note:</strong> 1.This is a fun game. Don't take it seriously.<br>
-            2.Take a screenshort your result.
-        </p>
-        
-        <!-- Result History Table -->
-        <div class="history-container">
-            <h2>Calculation History</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Your Name</th>
-                        <th>Lover's Name</th>
-                        <th>Love %</th>
-                    </tr>
-                </thead>
-                <tbody id="history-body">
-                    <!-- Results will be added here by JavaScript -->
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Visitor Counter Display Area -->
-        <div class="visitor-counter">
-            <p>👥 Total View's: <span id="visitor-count">Loading...</span></p>
-            
-        </div>
+    <div class="floating-hearts">
+        <div class="heart heart-1">❤️</div>
+        <div class="heart heart-2">💕</div>
+        <div class="heart heart-3">💖</div>
+        <div class="heart heart-4">💘</div>
+        <div class="heart heart-5">❤️</div>
     </div>
-    <script src="script.js"></script>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="title">Love Calculator</h1>
+            <p class="subtitle">Discover your love compatibility!</p>
+        </header>
+
+        <main class="main-content">
+            <div class="love-calculator-card">
+                <div class="card-header">
+                    <div class="heart-icon">💕</div>
+                </div>
+                
+                <form class="calculator-form" id="loveForm">
+                    <div class="form-group">
+                        <label for="name1" class="form-label">Your Name</label>
+                        <input 
+                            type="text" 
+                            id="name1" 
+                            class="form-control name-input" 
+                            placeholder="Enter your name"
+                            maxlength="50"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name2" class="form-label">Partner's Name</label>
+                        <input 
+                            type="text" 
+                            id="name2" 
+                            class="form-control name-input" 
+                            placeholder="Enter your partner's name"
+                            maxlength="50"
+                        >
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn--primary calculate-btn" id="calculateBtn">
+                            <span class="btn-text">Calculate Love</span>
+                            <span class="btn-heart">💖</span>
+                        </button>
+                        <button type="button" class="btn btn--secondary reset-btn" id="resetBtn">
+                            Reset
+                        </button>
+                    </div>
+                </form>
+
+                <div class="error-message" id="errorMessage"></div>
+
+                <div class="loading-animation hidden" id="loadingAnimation">
+                    <div class="loading-hearts">
+                        <span>💗</span>
+                        <span>💖</span>
+                        <span>💕</span>
+                    </div>
+                    <p>Calculating your love compatibility...</p>
+                </div>
+
+                <div class="result-container hidden" id="resultContainer">
+                    <div class="result-header">
+                        <h3 class="result-names" id="resultNames"></h3>
+                    </div>
+                    
+                    <div class="result-percentage">
+                        <div class="percentage-circle" id="percentageCircle">
+                            <span class="percentage-number" id="percentageNumber">0</span>
+                            <span class="percentage-symbol">%</span>
+                        </div>
+                    </div>
+
+                    <div class="result-message" id="resultMessage"></div>
+                    
+                    <div class="result-hearts" id="resultHearts"></div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>For entertainment purposes only! ❤️</p>
+            <p class="footer-note">Love is more than just a number, but numbers can be fun! 💕</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
 </body>
 </html>
